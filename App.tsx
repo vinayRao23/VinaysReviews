@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import RegisterScreen from "./Screens/RegisterScreen";
+import LoginScreen from "./Screens/LoginScreen";
 
 export default function App() {
   return (
     <View>
-      <RegisterScreen />
+      <LoginScreen />
     </View>
   );
 }
