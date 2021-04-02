@@ -1,16 +1,11 @@
-import { Formik } from "formik";
-import React, { Fragment } from "react";
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  View,
-} from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native";
 import * as Yup from "yup";
-import AppErrorMessage from "../Components/AppErrorMessage";
+import AppForm from "../Components/AppForm";
+import AppFormField from "../Components/AppFormField";
+import AppImage from "../Components/AppImage";
+import AppLogoText from "../Components/AppLogoText";
+import AppSubmitButton from "../Components/AppSubmitButton";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -21,124 +16,39 @@ const validationSchema = Yup.object().shape({
 const RegisterScreen = () => {
   return (
     <SafeAreaView>
-      <Formik
+      <AppImage />
+      <AppLogoText>VinaysReviews: Register</AppLogoText>
+      <AppForm
         initialValues={{ username: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values: string) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ errors, handleSubmit, handleChange, touched, setFieldTouched }) => (
-          <Fragment>
-            <View>
-              <Image
-                style={styles.image}
-                source={require("../assets/Logo.png")}
-              />
-              <Text style={styles.logoText}>VinaysReviews: Register</Text>
-            </View>
-            <View style={styles.formikContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Username"
-                onChangeText={handleChange("username")}
-                onBlur={() => setFieldTouched("username")}
-                placeholderTextColor="#D3D3D3"
-              />
-            </View>
-            <AppErrorMessage
-              style={{ bottom: 40, paddingLeft: 30 }}
-              error={errors.username}
-              visible={touched.username}
-            />
-            <View style={styles.formikContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#D3D3D3"
-                placeholder="Email"
-                onChangeText={handleChange("email")}
-                onBlur={() => setFieldTouched("email")}
-              />
-            </View>
-            <AppErrorMessage
-              style={{ bottom: 40, paddingLeft: 30 }}
-              error={errors.email}
-              visible={touched.email}
-            />
-            <View style={styles.formikContainer}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Password"
-                placeholderTextColor="#D3D3D3"
-                onChangeText={handleChange("password")}
-                onBlur={() => setFieldTouched("password")}
-                secureTextEntry
-              />
-            </View>
-            <AppErrorMessage
-              error={errors.password}
-              style={{ bottom: 41, paddingLeft: 30 }}
-              visible={touched.password}
-            />
-            <TouchableOpacity
-              style={styles.buttonBackground}
-              onPress={() => handleSubmit()}
-            >
-              <Text style={styles.buttonText}>Register</Text>
-            </TouchableOpacity>
-          </Fragment>
-        )}
-      </Formik>
+        <AppFormField
+          placeholder="Username"
+          autoCapitalize="none"
+          autoCorrect={false}
+          name="username"
+        />
+        <AppFormField
+          placeholder="Email"
+          autoCapitalize="none"
+          autoCorrect={false}
+          name="email"
+        />
+        <AppFormField
+          placeholder="Password"
+          autoCapitalize="none"
+          autoCorrect={false}
+          name="password"
+          secureTextEntry
+        />
+        <AppSubmitButton
+          onPress={() => console.log("working")}
+          title="Register"
+        />
+      </AppForm>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  formikContainer: {
-    alignSelf: "center",
-    backgroundColor: "#f8f4f4",
-    borderRadius: 25,
-    flexDirection: "row",
-    height: 55,
-    marginVertical: 10,
-    paddingLeft: 20,
-    bottom: 40,
-    width: "90%",
-  },
-  textInput: {
-    fontSize: 20,
-    fontFamily: "Arial",
-  },
-  logoText: {
-    fontSize: 30,
-    fontFamily: "Arial",
-    fontWeight: "500",
-    alignSelf: "center",
-    marginBottom: 50,
-  },
-  buttonText: {
-    fontSize: 20,
-    paddingTop: 14,
-    fontWeight: "bold",
-    fontFamily: "Arial",
-    color: "#fff",
-    alignSelf: "center",
-  },
-  buttonBackground: {
-    backgroundColor: "#5ab5da",
-    alignSelf: "center",
-    width: "90%",
-    borderRadius: 25,
-    bottom: 30,
-    height: 55,
-    fontSize: 30,
-  },
-  errorText: {
-    color: "#ff0000",
-    paddingRight: 15,
-  },
-  image: {
-    alignSelf: "center",
-    marginBottom: -40,
-  },
-});
 
 export default RegisterScreen;
