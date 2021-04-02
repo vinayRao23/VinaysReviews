@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import * as Yup from "yup";
+import AppErrorMessage from "../Components/AppErrorMessage";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -22,39 +23,64 @@ const RegisterScreen = () => {
     <SafeAreaView>
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
-        onSubmit={(values: any) => console.log(values)}
+        onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {() => (
+        {({ errors, handleSubmit, handleChange, touched, setFieldTouched }) => (
           <Fragment>
-            <View style={styles.image}>
-              <Image source={require("../assets/Logo.png")} />
+            <View>
+              <Image
+                style={styles.image}
+                source={require("../assets/Logo.png")}
+              />
+              <Text style={styles.logoText}>VinaysReviews: Register</Text>
             </View>
             <View style={styles.formikContainer}>
               <TextInput
                 style={styles.textInput}
                 placeholder="Username"
+                onChangeText={handleChange("username")}
+                onBlur={() => setFieldTouched("username")}
                 placeholderTextColor="#D3D3D3"
               />
             </View>
+            <AppErrorMessage
+              style={{ bottom: 40, paddingLeft: 30 }}
+              error={errors.username}
+              visible={touched.username}
+            />
             <View style={styles.formikContainer}>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#D3D3D3"
                 placeholder="Email"
+                onChangeText={handleChange("email")}
+                onBlur={() => setFieldTouched("email")}
               />
             </View>
+            <AppErrorMessage
+              style={{ bottom: 40, paddingLeft: 30 }}
+              error={errors.email}
+              visible={touched.email}
+            />
             <View style={styles.formikContainer}>
               <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 placeholderTextColor="#D3D3D3"
+                onChangeText={handleChange("password")}
+                onBlur={() => setFieldTouched("password")}
                 secureTextEntry
               />
             </View>
+            <AppErrorMessage
+              error={errors.password}
+              style={{ bottom: 41, paddingLeft: 30 }}
+              visible={touched.password}
+            />
             <TouchableOpacity
               style={styles.buttonBackground}
-              onPress={() => console.log("Working")}
+              onPress={() => handleSubmit()}
             >
               <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
@@ -79,17 +105,25 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 20,
-    fontFamily: "Avenir",
+    fontFamily: "Arial",
+  },
+  logoText: {
+    fontSize: 30,
+    fontFamily: "Arial",
+    fontWeight: "500",
+    alignSelf: "center",
+    marginBottom: 50,
   },
   buttonText: {
     fontSize: 20,
     paddingTop: 14,
     fontWeight: "bold",
+    fontFamily: "Arial",
     color: "#fff",
     alignSelf: "center",
   },
   buttonBackground: {
-    backgroundColor: "#fc5c65",
+    backgroundColor: "#5ab5da",
     alignSelf: "center",
     width: "90%",
     borderRadius: 25,
@@ -100,10 +134,10 @@ const styles = StyleSheet.create({
   errorText: {
     color: "#ff0000",
     paddingRight: 15,
-    marginTop: 45,
   },
   image: {
     alignSelf: "center",
+    marginBottom: -40,
   },
 });
 
