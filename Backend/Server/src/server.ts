@@ -5,6 +5,7 @@ import { createServer } from "http";
 import compression from "compression";
 import cors from "cors";
 import schema from "./schema";
+const { connectToDB } = require("../../DataBase/src/connection");
 const app = express();
 const server = new ApolloServer({
   schema,
@@ -12,6 +13,7 @@ const server = new ApolloServer({
 });
 app.use("*", cors());
 app.use(compression());
+connectToDB();
 server.applyMiddleware({ app, path: "/graphql" });
 
 const httpServer = createServer(app);
