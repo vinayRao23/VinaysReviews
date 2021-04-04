@@ -1,8 +1,12 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
-const AppLogoText = ({ style, children }: any) => {
-  return <Text style={[styles.logoText, style]}>{children}</Text>;
+const AppLogoText = ({ style, children, ...rest }: any) => {
+  return (
+    <Text style={[styles.logoText, style]} {...rest}>
+      {children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -1,11 +1,12 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
 import AppSubmitButton from "../Components/AppSubmitButton";
+import colors from "../Config/colors";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -35,10 +36,25 @@ const LoginScreen = () => {
           name="password"
           secureTextEntry
         />
-        <AppSubmitButton onPress={() => console.log("working")} title="Login" />
+        <AppSubmitButton
+          onPress={() => console.log("working")}
+          title="Login"
+          style={styles.loginButton}
+        />
       </AppForm>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  loginButton: {
+    backgroundColor: colors.lightGreen,
+    alignSelf: "center",
+    width: "90%",
+    borderRadius: 25,
+    height: 55,
+    bottom: -210,
+  },
+});
 
 export default LoginScreen;
