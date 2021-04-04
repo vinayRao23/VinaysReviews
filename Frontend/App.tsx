@@ -1,11 +1,6 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import AuthStackNavigator from "./Navigation/AuthStackNavigator";
+import HomeScreen from "./Screens/HomeScreen";
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <AuthStackNavigator />
-    </NavigationContainer>
-  );
+  return <HomeScreen />;
 }

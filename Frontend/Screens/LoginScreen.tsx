@@ -8,6 +8,7 @@ import AppLogoText from "../Components/AppLogoText";
 import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
 import colors from "../Config/colors";
+import routes from "../Navigation/routes";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -41,7 +42,7 @@ const LoginScreen = ({ navigation }: any) => {
         <AppRedirect
           text="Don't Have an Account?"
           clickableText=" Create One Here"
-          onPress={() => navigation.navigate("RegisterScreen")}
+          onPress={() => navigation.navigate(routes.REGISTER_SCREEN)}
         />
       </AppForm>
     </SafeAreaView>

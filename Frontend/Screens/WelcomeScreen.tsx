@@ -5,6 +5,7 @@ import AppButton from "../Components/AppButton";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
 import colors from "../Config/colors";
+import routes from "../Navigation/routes";
 
 interface IProps {
   navigation: NavigationProp<any>;
@@ -21,13 +22,13 @@ const WelcomeScreen = ({ navigation }: IProps) => {
         <AppImage style={styles.image} />
       </View>
       <AppButton
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => navigation.navigate(routes.LOGIN_SCREEN)}
         title="Login"
         style={styles.loginButton}
       />
       <SafeAreaView style={styles.buttonSpace1} />
       <AppButton
-        onPress={() => navigation.navigate("RegisterScreen")}
+        onPress={() => navigation.navigate(routes.REGISTER_SCREEN)}
         title="Register"
       />
       <SafeAreaView style={styles.buttonSpace2} />
