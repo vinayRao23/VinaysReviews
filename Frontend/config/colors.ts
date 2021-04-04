@@ -6,4 +6,5 @@ export default {
   red: "red",
   white: "#fff",
   hyperlinkBlue: "#4385f4",
+  lightBlack: "#242424",
 };
