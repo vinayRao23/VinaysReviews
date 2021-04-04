@@ -1,13 +1,18 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
 import AppButton from "../Components/AppButton";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
 import colors from "../Config/colors";
 
-const WelcomeScreen = () => {
+interface IProps {
+  navigation: NavigationProp<any>;
+}
+
+const WelcomeScreen = ({ navigation }: IProps) => {
   return (
-    <View>
+    <View style={styles.container}>
       <AppLogoText style={styles.logoText}>
         Where Reviews Take Place
       </AppLogoText>
@@ -16,38 +21,45 @@ const WelcomeScreen = () => {
         <AppImage style={styles.image} />
       </View>
       <AppButton
-        onPress={() => console.log("YEET")}
+        onPress={() => navigation.navigate("LoginScreen")}
         title="Login"
         style={styles.loginButton}
       />
       <SafeAreaView style={styles.buttonSpace1} />
-      <AppButton onPress={() => console.log("YEET")} title="Register" />
+      <AppButton
+        onPress={() => navigation.navigate("RegisterScreen")}
+        title="Register"
+      />
       <SafeAreaView style={styles.buttonSpace2} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
   logoText: {
     fontSize: 20,
     fontStyle: "italic",
     fontWeight: "400",
   },
   image: {
-    marginTop: 135,
-    top: 120,
+    marginTop: 90,
+    top: 130,
     width: "90%",
     height: "90%",
   },
   buttonSpace1: {
     width: 20,
     height: 120,
-    marginBottom: -100,
+    marginBottom: -280,
   },
   buttonSpace2: {
     width: 20,
     height: 110,
-    marginBottom: -200,
+    marginBottom: -320,
   },
   loginButton: {
     backgroundColor: colors.lightGreen,
@@ -55,7 +67,7 @@ const styles = StyleSheet.create({
     width: "90%",
     borderRadius: 25,
     height: 55,
-    bottom: -220,
+    bottom: -40,
   },
 });
 

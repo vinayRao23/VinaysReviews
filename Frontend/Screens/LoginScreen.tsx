@@ -5,6 +5,7 @@ import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
+import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
 import colors from "../Config/colors";
 
@@ -13,9 +14,9 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }: any) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <AppImage />
       <AppLogoText>VinaysReviews: Login</AppLogoText>
       <AppForm
@@ -36,10 +37,11 @@ const LoginScreen = () => {
           name="password"
           secureTextEntry
         />
-        <AppSubmitButton
-          onPress={() => console.log("working")}
-          title="Login"
-          style={styles.loginButton}
+        <AppSubmitButton title="Login" style={styles.loginButton} />
+        <AppRedirect
+          text="Don't Have an Account?"
+          clickableText=" Create One Here"
+          onPress={() => navigation.navigate("RegisterScreen")}
         />
       </AppForm>
     </SafeAreaView>
@@ -47,6 +49,10 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
   loginButton: {
     backgroundColor: colors.lightGreen,
     alignSelf: "center",

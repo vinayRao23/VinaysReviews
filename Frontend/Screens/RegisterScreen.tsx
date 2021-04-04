@@ -1,11 +1,13 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
+import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
+import colors from "../Config/colors";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -13,9 +15,9 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }: any) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <AppImage />
       <AppLogoText>VinaysReviews: Register</AppLogoText>
       <AppForm
@@ -42,13 +44,22 @@ const RegisterScreen = () => {
           name="password"
           secureTextEntry
         />
-        <AppSubmitButton
-          onPress={() => console.log("working")}
-          title="Register"
+        <AppSubmitButton title="Register" />
+        <AppRedirect
+          text="Already Have an Account?"
+          clickableText=" Login Here"
+          onPress={() => navigation.navigate("LoginScreen")}
         />
       </AppForm>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
+});
 
 export default RegisterScreen;
