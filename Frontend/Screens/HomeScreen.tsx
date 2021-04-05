@@ -1,39 +1,56 @@
 import React, { Fragment } from "react";
-import { View, StyleSheet } from "react-native";
-import AppLogoText from "../Components/AppLogoText";
+import { StyleSheet, FlatList, SafeAreaView, ScrollView } from "react-native";
+import AppImage from "../Components/AppImage";
 import Card from "../Components/Card";
 
 const HomeScreen = () => {
   return (
     <Fragment>
-      <View>
-        <AppLogoText style={styles.headerText}>VinaysReviews: Home</AppLogoText>
-      </View>
-      <View>
-        <Card
-          title="Harry Potter"
-          author="J.K. Rowling"
-          bookImage={require("../assets/test.png")}
-          endText="View 8 Comments"
-          profileImage={require("../assets/profileImage.png")}
-        />
-      </View>
-      <View>
-        <Card
-          title="Harry Potter"
-          author="J.K. Rowling"
-          bookImage={require("../assets/test.png")}
-          endText="View 8 Comments"
-          profileImage={require("../assets/profileImage.png")}
-        />
-      </View>
+      <AppImage style={styles.image} />
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
+          <Card
+            title="Harry Potter"
+            author="Vinay Rao"
+            bookImage={require("../assets/test.png")}
+            endText="View 8 Comments"
+            profileImage={require("../assets/profileImage.png")}
+          />
+          <Card
+            title="Harry Potter"
+            author="Vinay Rao"
+            bookImage={require("../assets/test.png")}
+            endText="View 8 Comments"
+            profileImage={require("../assets/profileImage.png")}
+          />
+          <Card
+            title="Harry Potter"
+            author="Vinay Rao"
+            bookImage={require("../assets/test.png")}
+            endText="View 8 Comments"
+            profileImage={require("../assets/profileImage.png")}
+          />
+          <Card
+            title="Harry Potter"
+            author="Vinay Rao"
+            bookImage={require("../assets/test.png")}
+            endText="View 8 Comments"
+            profileImage={require("../assets/profileImage.png")}
+          />
+        </ScrollView>
+      </SafeAreaView>
     </Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  headerText: {
-    top: 100,
+  image: {
+    top: 30,
+    width: "80%",
+    height: "20%",
+  },
+  container: {
+    flex: 1,
   },
 });
 
