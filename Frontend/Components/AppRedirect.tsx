@@ -24,9 +24,10 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     bottom: -20,
+    fontFamily: "Avenir-Medium",
   },
   clickableTextStyle: {
-    bottom: -3,
+    bottom: -1.25,
     color: colors.hyperlinkBlue,
   },
 });

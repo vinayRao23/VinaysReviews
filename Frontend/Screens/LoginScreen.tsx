@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <AppImage />
-      <AppLogoText>VinaysReviews: Login</AppLogoText>
+      <AppLogoText style={styles.logoText}>VinaysReviews: Login</AppLogoText>
       <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={(values: string) => console.log(values)}
@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     flex: 1,
+  },
+  logoText: {
+    fontFamily: "Avenir-Medium",
+    fontWeight: "700",
   },
   loginButton: {
     backgroundColor: colors.lightGreen,

@@ -12,8 +12,8 @@ const AppLogoText = ({ style, children, ...rest }: any) => {
 const styles = StyleSheet.create({
   logoText: {
     fontSize: 30,
-    fontFamily: "Arial",
-    fontWeight: "500",
+    fontFamily: "Avenir-Medium",
+    fontWeight: "700",
     alignSelf: "center",
     bottom: -120,
     marginBottom: -60,

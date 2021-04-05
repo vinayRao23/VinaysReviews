@@ -20,7 +20,7 @@ const RegisterScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <AppImage />
-      <AppLogoText>VinaysReviews: Register</AppLogoText>
+      <AppLogoText style={styles.logoText}>VinaysReviews: Register</AppLogoText>
       <AppForm
         initialValues={{ username: "", email: "", password: "" }}
         onSubmit={(values: string) => console.log(values)}
@@ -57,6 +57,10 @@ const RegisterScreen = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
+  logoText: {
+    fontFamily: "Avenir-Medium",
+    fontWeight: "700",
+  },
   container: {
     backgroundColor: colors.white,
     flex: 1,
