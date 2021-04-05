@@ -7,4 +7,9 @@ export default {
   hyperlinkBlue: "#4385f4",
   black: "black",
   lightGray: "#ebeef0",
+  darkBlue: "#1f65ff",
+  lightPurple: "#cbc3e3",
+  lemonYellow: "#fed54a",
+  brightMagenta: "#fd297a",
+  tourqouise: "#36d7b7",
 };
