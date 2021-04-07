@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 
 const MyReviewsScreen = ({}) => {
-  return <Text>Hi</Text>;
+  return <Text>Hello World</Text>;
 };
 
 export default MyReviewsScreen;

@@ -1,82 +1,80 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { SafeAreaView, StyleSheet, Image } from "react-native";
 import colors from "../Config/colors";
 import AppText from "./AppText";
 
-const Card = ({ title, author, bookImage, endText, profileImage }: any) => {
+const Card = ({ title, subTitle, image, author, authorImage, stars }: any) => {
   return (
-    <View style={styles.container}>
-      <Image source={bookImage} style={styles.image} />
-      <View style={styles.detailsContainer}>
+    <SafeAreaView style={styles.card}>
+      <Image source={image} style={styles.image} />
+      <SafeAreaView style={styles.detailsContainer}>
         <AppText style={styles.title}>{title}</AppText>
-        <Image source={profileImage} style={styles.profileImage} />
+        <AppText style={styles.stars}>{stars}</AppText>
+        <Image source={authorImage} style={styles.authorImage} />
         <AppText style={styles.author}>{author}</AppText>
-        <AppText style={styles.endText}>{endText}</AppText>
-      </View>
-    </View>
+        <AppText style={styles.subTitle}>{subTitle}</AppText>
+      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.lightGray,
-    borderRadius: 10,
-    marginTop: 20,
-    top: 135,
-    height: 250,
+  card: {
+    borderRadius: 20,
+    backgroundColor: colors.white,
+    overflow: "hidden",
     width: "90%",
+    height: 370,
     alignSelf: "center",
-    justifyContent: "center",
-    borderColor: colors.black,
-    borderWidth: 2,
+    marginTop: 70,
+    flex: 1,
   },
   image: {
-    height: 250,
-    width: 145,
-    top: 16,
-    left: 119,
+    width: "100%",
+    height: 200,
     alignSelf: "center",
-    justifyContent: "center",
-    borderRadius: 10,
   },
   detailsContainer: {
-    marginTop: -150,
+    padding: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 22,
     paddingLeft: 20,
     paddingTop: 10,
-    marginTop: 5,
-    fontWeight: "700",
-    color: colors.black,
+    fontWeight: "600",
     fontFamily: "Avenir-Medium",
-    bottom: 90,
+  },
+  stars: {
+    fontSize: 22,
+    left: 330,
+    paddingTop: 10,
+    fontWeight: "600",
+    fontFamily: "Avenir-Medium",
   },
   author: {
-    marginTop: 10,
-    fontWeight: "700",
-    fontSize: 20,
-    paddingLeft: 70,
-    paddingBottom: 10,
-    color: colors.black,
-    bottom: 118,
-    fontFamily: "Avenir-Medium",
-  },
-  endText: {
-    marginTop: 15,
     fontSize: 15,
-    paddingLeft: 20,
-    bottom: 25,
-    fontWeight: "700",
-    color: colors.black,
+    paddingLeft: 62,
+    paddingTop: 30,
+    bottom: 93,
+    fontWeight: "600",
     fontFamily: "Avenir-Medium",
   },
-  profileImage: {
-    left: 18,
-    width: "10%",
-    height: 40,
-    borderRadius: 20,
-    top: -75,
+  authorImage: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    marginLeft: 15,
+    bottom: 33,
+  },
+  subTitle: {
+    bottom: 30,
+    fontWeight: "bold",
+    color: colors.hyperlinkBlue,
+    paddingLeft: 19,
+    paddingBottom: 10,
+    textDecorationLine: "underline",
+    fontFamily: "Avenir-Medium",
+    fontSize: 15,
   },
 });
 
