@@ -2,11 +2,11 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../Config/colors";
-import HomeScreen from "../Screens/HomeScreen";
 import TodaysReviewsScreen from "../Screens/TodaysReviewsScreen";
 import CreateReviewScreen from "../Screens/CreateReviewScreen";
 import MyReviewsScreen from "../Screens/MyReviewsScreen";
 import MyAccountScreen from "../Screens/MyAccountScreen";
+import FeedNavigator from "./FeedNavigator";
 
 const AppTabNavigator = createMaterialBottomTabNavigator();
 
@@ -15,7 +15,7 @@ const AppNavigator = ({}: any) => {
     <AppTabNavigator.Navigator activeColor={colors.black}>
       <AppTabNavigator.Screen
         name="Feed"
-        component={HomeScreen}
+        component={FeedNavigator}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="home" size={26} />,
           tabBarColor: colors.darkBlue,

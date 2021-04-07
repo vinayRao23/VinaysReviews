@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import Card from "../Components/Card";
 
 const Fatty = [
@@ -7,8 +7,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 1,
   },
@@ -16,8 +16,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 2,
   },
@@ -25,8 +25,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 3,
   },
@@ -34,8 +34,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 4,
   },
@@ -43,8 +43,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 5,
   },
@@ -52,8 +52,8 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 6,
   },
@@ -61,27 +61,30 @@ const Fatty = [
     title: "Harry Potter",
     author: "Vinay Rao",
     image: require("../assets/test.png"),
-    subTitle: "View 8 Comments",
     authorImage: require("../assets/profileImage.png"),
+    clickableText: "View 8 Comments",
     stars: "5/5",
     id: 7,
   },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
   return (
     <FlatList
       data={Fatty}
       keyExtractor={(c) => c.id.toString()}
       renderItem={({ item }) => (
-        <Card
-          title={item.title}
-          subTitle={item.subTitle}
-          image={item.image}
-          author={item.author}
-          authorImage={item.authorImage}
-          stars={item.stars}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+          <Card
+            title={item.title}
+            image={item.image}
+            author={item.author}
+            clickableText={item.clickableText}
+            authorImage={item.authorImage}
+            stars={item.stars}
+            onPress={() => navigation.navigate("ViewComments")}
+          />
+        </TouchableOpacity>
       )}
     />
   );

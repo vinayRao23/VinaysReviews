@@ -1,9 +1,22 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Image } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import colors from "../Config/colors";
 import AppText from "./AppText";
 
-const Card = ({ title, subTitle, image, author, authorImage, stars }: any) => {
+const Card = ({
+  title,
+  image,
+  author,
+  authorImage,
+  stars,
+  clickableText,
+  onPress,
+}: any) => {
   return (
     <SafeAreaView style={styles.card}>
       <Image source={image} style={styles.image} />
@@ -12,7 +25,9 @@ const Card = ({ title, subTitle, image, author, authorImage, stars }: any) => {
         <AppText style={styles.stars}>{stars}</AppText>
         <Image source={authorImage} style={styles.authorImage} />
         <AppText style={styles.author}>{author}</AppText>
-        <AppText style={styles.subTitle}>{subTitle}</AppText>
+        <TouchableOpacity onPress={onPress}>
+          <AppText style={styles.clickableText}>{clickableText}</AppText>
+        </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaView>
   );
@@ -66,7 +81,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     bottom: 33,
   },
-  subTitle: {
+  clickableText: {
     bottom: 30,
     fontWeight: "bold",
     color: colors.hyperlinkBlue,
