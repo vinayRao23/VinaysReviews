@@ -8,12 +8,5 @@ type Mutation {
     email: String!
     password: String!
     id: String!
-  ): User
-}
-
-type User {
-  username: String!
-  email: String!
-  password: String!
-  id: String!
+  ): String!
 }

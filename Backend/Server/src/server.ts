@@ -1,7 +1,6 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import depthLimit from "graphql-depth-limit";
-import { createServer } from "http";
+import config from "config";
 import compression from "compression";
 import cors from "cors";
 import resolvers from "./resolvers";
@@ -20,6 +19,10 @@ app.use("*", cors());
 app.use(compression());
 connectToDB();
 server.applyMiddleware({ app, path: "/graphql" });
+
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR. mySecureKey is not defined.");
+}
 
 const port = process.env.PORT || 4000;
 server.applyMiddleware({
