@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import Card from "../Components/Card";
+import routes from "../Navigation/routes";
 
 const Fatty = [
   {
@@ -74,7 +75,7 @@ const HomeScreen = ({ navigation }: any) => {
       data={Fatty}
       keyExtractor={(c) => c.id.toString()}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+        <TouchableOpacity onPress={() => navigation.navigate(routes.DETAILS)}>
           <Card
             title={item.title}
             image={item.image}
@@ -82,7 +83,7 @@ const HomeScreen = ({ navigation }: any) => {
             clickableText={item.clickableText}
             authorImage={item.authorImage}
             stars={item.stars}
-            onPress={() => navigation.navigate("ViewComments")}
+            onPress={() => navigation.navigate(routes.VIEW_COMMENTS)}
           />
         </TouchableOpacity>
       )}

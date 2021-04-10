@@ -3,23 +3,24 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../Screens/HomeScreen";
 import ReviewDetailsScreen from "../Screens/ReviewDetailsScreen";
 import ViewCommentsScreen from "../Screens/ViewCommentsScreen";
+import routes from "./routes";
 
 const FeedStack = createStackNavigator();
 const FeedNavigator = () => {
   return (
     <FeedStack.Navigator>
       <FeedStack.Screen
-        name="Home"
+        name={routes.HOME}
         component={HomeScreen}
         options={{ headerShown: false, title: "Back" }}
       />
       <FeedStack.Screen
-        name="Details"
+        name={routes.DETAILS}
         component={ReviewDetailsScreen}
         options={{ title: "Details" }}
       />
       <FeedStack.Screen
-        name="ViewComments"
+        name={routes.VIEW_COMMENTS}
         component={ViewCommentsScreen}
         options={{ title: "View Comments" }}
       />

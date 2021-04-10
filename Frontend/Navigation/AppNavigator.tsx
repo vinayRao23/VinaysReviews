@@ -7,6 +7,7 @@ import CreateReviewScreen from "../Screens/CreateReviewScreen";
 import MyReviewsScreen from "../Screens/MyReviewsScreen";
 import MyAccountScreen from "../Screens/MyAccountScreen";
 import FeedNavigator from "./FeedNavigator";
+import routes from "./routes";
 
 const AppTabNavigator = createMaterialBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const AppNavigator = ({}: any) => {
   return (
     <AppTabNavigator.Navigator activeColor={colors.black}>
       <AppTabNavigator.Screen
-        name="Feed"
+        name={routes.FEED}
         component={FeedNavigator}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="home" size={26} />,
@@ -22,7 +23,7 @@ const AppNavigator = ({}: any) => {
         }}
       />
       <AppTabNavigator.Screen
-        name="TodaysReviews"
+        name={routes.TODAYS_REVIEWS}
         component={TodaysReviewsScreen}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="fire" size={28} />,
@@ -31,7 +32,7 @@ const AppNavigator = ({}: any) => {
         }}
       />
       <AppTabNavigator.Screen
-        name="+"
+        name={routes.ADD_REVIEW}
         component={CreateReviewScreen}
         options={{
           tabBarIcon: () => (
@@ -42,7 +43,7 @@ const AppNavigator = ({}: any) => {
         }}
       />
       <AppTabNavigator.Screen
-        name="MyReviews"
+        name={routes.MY_REVIEWS}
         component={MyReviewsScreen}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="book" size={26} />,
@@ -51,7 +52,7 @@ const AppNavigator = ({}: any) => {
         }}
       />
       <AppTabNavigator.Screen
-        name="Account"
+        name={routes.ACCOUNT}
         component={MyAccountScreen}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="account" size={26} />,
