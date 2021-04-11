@@ -7,8 +7,9 @@ import bcrypt from "bcrypt";
 
 const resolvers: IResolvers = {
   Query: {
-    helloWorld(_: void, __: void): string {
-      return "Hello world!";
+    getAllUsers: async (_: void, __: void) => {
+      const users = await User.findAll();
+      return users;
     },
   },
   Mutation: {
@@ -27,6 +28,25 @@ const resolvers: IResolvers = {
         config.get("jwtPrivateKey")
       );
       await user.save();
+      return token;
+    },
+    loginUser: async (_: void, args: UserArgsInt) => {
+      const user = await User.findOne({
+        where: {
+          email: args.email,
+        },
+      });
+      if (!user) {
+        return "Invalid email and/or password";
+      }
+      const validPassword = await bcrypt.compare(args.password, user.password);
+      if (!validPassword) {
+        return "Invalid email and/or password";
+      }
+      const token = jwt.sign(
+        { username: user.username, email: user.email, id: user.id },
+        config.get("jwtPrivateKey")
+      );
       return token;
     },
   },

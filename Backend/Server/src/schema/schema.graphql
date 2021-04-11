@@ -1,5 +1,5 @@
 type Query {
-  helloWorld: String!
+  getAllUsers: [User]
 }
 
 type Mutation {
@@ -9,4 +9,11 @@ type Mutation {
     password: String!
     id: String!
   ): String!
+  loginUser(email: String!, password: String!): String!
+}
+
+type User {
+  username: String!
+  email: String!
+  password: String!
 }
