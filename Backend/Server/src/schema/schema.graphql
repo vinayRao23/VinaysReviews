@@ -7,6 +7,7 @@ type Mutation {
     username: String!
     email: String!
     password: String!
+    profilePicture: String!
     id: String!
   ): String!
   loginUser(email: String!, password: String!): String!

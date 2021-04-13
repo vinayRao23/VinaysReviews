@@ -21,10 +21,16 @@ const resolvers: IResolvers = {
         username: args.username,
         email: args.email,
         password,
+        profilePicture: args.profilePicture,
         id: args.id,
       });
       const token = jwt.sign(
-        { username: user.username, email: user.email, id: user.id },
+        {
+          username: user.username,
+          email: user.email,
+          id: user.id,
+          profilePicture: user.profilePicture,
+        },
         config.get("jwtPrivateKey")
       );
       await user.save();
