@@ -43,11 +43,11 @@ const resolvers: IResolvers = {
         },
       });
       if (!user) {
-        return "Invalid email and/or password";
+        return "Invalid email or password";
       }
       const validPassword = await bcrypt.compare(args.password, user.password);
       if (!validPassword) {
-        return "Invalid email and/or password";
+        return "Invalid email or password";
       }
       const token = jwt.sign(
         { username: user.username, email: user.email, id: user.id },
