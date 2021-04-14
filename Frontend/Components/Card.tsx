@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 import AppText from "./AppText";
 
 const Card = ({

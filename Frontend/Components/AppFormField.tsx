@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 import AppTextInput from "./AppTextInput";
 import AppErrorMessage from "./AppErrorMessage";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 
 const AppFormField = ({ name, width, ...rest }: any) => {
   const {
@@ -28,7 +28,7 @@ const AppFormField = ({ name, width, ...rest }: any) => {
 const styles = StyleSheet.create({
   formikContainer: {
     alignSelf: "center",
-    backgroundColor: colors.light,
+    backgroundColor: colors.lightGray,
     borderRadius: 25,
     flexDirection: "row",
     height: 55,

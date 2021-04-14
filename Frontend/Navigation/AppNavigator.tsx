@@ -1,7 +1,7 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 import TodaysReviewsScreen from "../Screens/TodaysReviewsScreen";
 import CreateReviewScreen from "../Screens/CreateReviewScreen";
 import MyReviewsScreen from "../Screens/MyReviewsScreen";

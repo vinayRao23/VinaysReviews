@@ -1,14 +1,17 @@
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
+import { client } from "../App";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
 import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 import routes from "../Navigation/routes";
+import { REGISTER } from "../Apollo/RegisterMutation";
+import storage from "../auth/storage";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -17,13 +20,32 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }: any) => {
+  const handleSubmit = async (values: any) => {
+    try {
+      const result = await client.mutate({
+        mutation: REGISTER,
+        variables: {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+          profilePicture: "GGG",
+          id: "10101w01",
+        },
+      });
+      await storage.storeToken(result.data.registerUser);
+      navigation.navigate(routes.FEED);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <AppImage />
       <AppLogoText style={styles.logoText}>VinaysReviews: Register</AppLogoText>
       <AppForm
         initialValues={{ username: "", email: "", password: "" }}
-        onSubmit={(values: string) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <AppFormField

@@ -7,7 +7,7 @@ import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
 import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 import routes from "../Navigation/routes";
 
 const validationSchema = Yup.object().shape({

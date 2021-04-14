@@ -3,7 +3,7 @@ import { View, StyleSheet, SafeAreaView } from "react-native";
 import AppButton from "../Components/AppButton";
 import AppImage from "../Components/AppImage";
 import AppLogoText from "../Components/AppLogoText";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 import routes from "../Navigation/routes";
 
 const WelcomeScreen = ({ navigation }: any) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image, ScrollView } from "react-native";
 import AppText from "../Components/AppText";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 
 const ReviewDetailsScreen = ({}: any) => {
   return (

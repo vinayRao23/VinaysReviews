@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
-import colors from "../Config/colors";
+import colors from "../config/colors";
 
 const AppTextInput = ({ style, ...rest }: any) => {
   return (
