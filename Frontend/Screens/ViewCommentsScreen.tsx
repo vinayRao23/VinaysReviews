@@ -22,9 +22,7 @@ const ViewCommentsScreen = ({}: any) => {
         source={require("../assets/profileImage.png")}
         style={styles.authorImage}
       />
-      <AppText style={styles.subTitle}>
-        Avinash Rao: AHHHHHHHHHH JUST GIVE ME MY INTERNSHIP ALREADY
-      </AppText>
+      <AppText style={styles.subTitle}>Avinash Rao: noice</AppText>
     </View>
   );
 };

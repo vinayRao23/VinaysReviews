@@ -1,29 +1,26 @@
-import React, { Fragment } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
-import ListItem from "../Components/ListItem";
-import colors from "../config/colors";
+import React, { useContext } from "react";
+import { SafeAreaView, TouchableOpacity } from "react-native";
+import storage from "../auth/storage";
+import AppText from "../Components/AppText";
+import { AuthContext } from "../Context/authContext";
 
 const MyAccountScreen = () => {
+  const authContext = useContext(AuthContext);
+  const handleSubmit = async () => {
+    try {
+      await storage.removeToken();
+      authContext.setUser(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <Fragment>
-      <SafeAreaView style={styles.container}>
-        <ListItem
-          image={require("../assets/profileImage.png")}
-          title="Hi"
-          subTitle="Bye"
-        />
+    <TouchableOpacity onPress={handleSubmit}>
+      <SafeAreaView>
+        <AppText>Logout</AppText>
       </SafeAreaView>
-    </Fragment>
+    </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.white,
-    marginTop: 30,
-    height: 100,
-    top: 20,
-  },
-});
 
 export default MyAccountScreen;

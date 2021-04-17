@@ -6,6 +6,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import storage from "./auth/storage";
 import AppNavigator from "./Navigation/AppNavigator";
 import AppLoading from "expo-app-loading";
+import { AuthContext } from "./Context/authContext";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -29,9 +30,11 @@ const App = () => {
     );
   }
   return (
-    <NavigationContainer>
-      {user ? <AppNavigator /> : <AuthStackNavigator />}
-    </NavigationContainer>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <NavigationContainer>
+        {user ? <AppNavigator /> : <AuthStackNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 

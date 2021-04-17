@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
+import storage from "../auth/storage";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppImage from "../Components/AppImage";
@@ -8,7 +9,12 @@ import AppLogoText from "../Components/AppLogoText";
 import AppRedirect from "../Components/AppRedirect";
 import AppSubmitButton from "../Components/AppSubmitButton";
 import colors from "../config/colors";
+import { client } from "../App";
 import routes from "../Navigation/routes";
+import { LOGIN } from "../Apollo/LoginMutation";
+import AppErrorMessage from "../Components/AppErrorMessage";
+import { AuthContext } from "../Context/authContext";
+import jwtDecode from "jwt-decode";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -16,13 +22,32 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = ({ navigation }: any) => {
+  const [apolloErrorVisible, setApolloErrorVisible] = useState(false);
+  const authContext = useContext(AuthContext);
+  const handleSubmit = async (values: any) => {
+    try {
+      const result = await client.mutate({
+        mutation: LOGIN,
+        variables: {
+          email: values.email,
+          password: values.password,
+        },
+      });
+      await storage.storeToken(result.data.loginUser);
+      const user = jwtDecode(result.data.loginUser);
+      authContext.setUser(user);
+    } catch (error) {
+      console.log(error);
+      setApolloErrorVisible(true);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <AppImage />
       <AppLogoText style={styles.logoText}>VinaysReviews: Login</AppLogoText>
       <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values: string) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <AppFormField
@@ -30,6 +55,10 @@ const LoginScreen = ({ navigation }: any) => {
           autoCapitalize="none"
           autoCorrect={false}
           name="email"
+        />
+        <AppErrorMessage
+          error="Invalid email or password"
+          visible={apolloErrorVisible}
         />
         <AppFormField
           placeholder="Password"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
 import { client } from "../App";
@@ -12,6 +12,9 @@ import colors from "../config/colors";
 import routes from "../Navigation/routes";
 import { REGISTER } from "../Apollo/RegisterMutation";
 import storage from "../auth/storage";
+import { AuthContext } from "../Context/authContext";
+import jwtDecode from "jwt-decode";
+import AppErrorMessage from "../Components/AppErrorMessage";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -20,6 +23,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }: any) => {
+  const [apolloErrorVisible, setApolloErrorVisible] = useState(false);
+  const authContext = useContext(AuthContext);
   const handleSubmit = async (values: any) => {
     try {
       const result = await client.mutate({
@@ -33,9 +38,11 @@ const RegisterScreen = ({ navigation }: any) => {
         },
       });
       await storage.storeToken(result.data.registerUser);
-      navigation.navigate(routes.FEED);
+      const user = jwtDecode(result.data.registerUser);
+      authContext.setUser(user);
     } catch (error) {
       console.log(error);
+      setApolloErrorVisible(true);
     }
   };
 
@@ -59,6 +66,10 @@ const RegisterScreen = ({ navigation }: any) => {
           autoCapitalize="none"
           autoCorrect={false}
           name="email"
+        />
+        <AppErrorMessage
+          error="Account with the given email already exists"
+          visible={apolloErrorVisible}
         />
         <AppFormField
           placeholder="Password"
