@@ -14,7 +14,6 @@ const resolvers: IResolvers = {
   },
   Mutation: {
     registerUser: async (_: void, args: UserArgsInt) => {
-      await User.sync({ force: true });
       const salt = await bcrypt.genSalt(10);
       const password = await bcrypt.hash(args.password, salt);
       const user = User.build({
