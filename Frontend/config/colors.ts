@@ -12,4 +12,5 @@ export default {
   lemonYellow: "#fed54a",
   brightMagenta: "#fd297a",
   tourqouise: "#36d7b7",
+  danger: "#dc3445",
 };

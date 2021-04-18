@@ -15,6 +15,7 @@ import storage from "../auth/storage";
 import { AuthContext } from "../Context/authContext";
 import jwtDecode from "jwt-decode";
 import AppErrorMessage from "../Components/AppErrorMessage";
+import { generateId } from "../Utils/GenerateId";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -33,15 +34,14 @@ const RegisterScreen = ({ navigation }: any) => {
           username: values.username,
           email: values.email,
           password: values.password,
-          profilePicture: "GGG",
-          id: "10101w01",
+          id: generateId(24),
         },
       });
       await storage.storeToken(result.data.registerUser);
       const user = jwtDecode(result.data.registerUser);
       authContext.setUser(user);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       setApolloErrorVisible(true);
     }
   };

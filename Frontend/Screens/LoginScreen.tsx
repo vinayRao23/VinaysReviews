@@ -55,6 +55,7 @@ const LoginScreen = ({ navigation }: any) => {
           autoCapitalize="none"
           autoCorrect={false}
           name="email"
+          isInvalid={true}
         />
         <AppErrorMessage
           error="Invalid email or password"
@@ -65,6 +66,7 @@ const LoginScreen = ({ navigation }: any) => {
           autoCapitalize="none"
           autoCorrect={false}
           name="password"
+          isInvalid={true}
           secureTextEntry
         />
         <AppSubmitButton title="Login" style={styles.loginButton} />
