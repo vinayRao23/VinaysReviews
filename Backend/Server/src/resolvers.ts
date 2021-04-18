@@ -14,26 +14,31 @@ const resolvers: IResolvers = {
   },
   Mutation: {
     registerUser: async (_: void, args: UserArgsInt) => {
-      const salt = await bcrypt.genSalt(10);
-      const password = await bcrypt.hash(args.password, salt);
-      const user = User.build({
-        username: args.username,
-        email: args.email,
-        password,
-        profilePicture: args.profilePicture,
-        id: args.id,
-      });
-      const token = jwt.sign(
-        {
-          username: user.username,
-          email: user.email,
-          id: user.id,
-          profilePicture: user.profilePicture,
-        },
-        config.get("jwtPrivateKey")
-      );
-      await user.save();
-      return token;
+      // await User.sync({ force: true });
+      try {
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(args.password, salt);
+        const user = User.build({
+          username: args.username,
+          email: args.email,
+          password,
+          profilePicture: args.profilePicture,
+          id: args.id,
+        });
+        const token = jwt.sign(
+          {
+            username: user.username,
+            email: user.email,
+            id: user.id,
+            profilePicture: user.profilePicture,
+          },
+          config.get("jwtPrivateKey")
+        );
+        await user.save();
+        return token;
+      } catch (err) {
+        console.log(err.message);
+      }
     },
     loginUser: async (_: void, args: UserArgsInt) => {
       const user = await User.findOne({
@@ -49,7 +54,12 @@ const resolvers: IResolvers = {
         return "Invalid email or password";
       }
       const token = jwt.sign(
-        { username: user.username, email: user.email, id: user.id },
+        {
+          username: user.username,
+          email: user.email,
+          id: user.id,
+          profilePicture: user.profilePicture,
+        },
         config.get("jwtPrivateKey")
       );
       return token;

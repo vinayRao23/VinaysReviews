@@ -11,9 +11,9 @@ export const User = sequelize.define("User", {
     allowNull: false,
   },
   profilePicture: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     defaultValue:
-      "http://static1.squarespace.com/static/54b7b93ce4b0a3e130d5d232/54e20ebce4b014cdbc3fd71b/5a992947e2c48320418ae5e0/1519987239570/icon.png?format=1500w",
+      "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
   },
 });
