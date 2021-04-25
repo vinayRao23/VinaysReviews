@@ -1,5 +1,6 @@
 type Query {
   getAllUsers: [User]
+  getAllReviews: [Review]
 }
 
 type Mutation {
@@ -7,14 +8,57 @@ type Mutation {
     username: String!
     email: String!
     password: String!
-    profilePicture: String
+    profilePicture: String!
     id: String!
   ): String!
   loginUser(email: String!, password: String!): String!
+  Review(
+    title: String!
+    author: Author1!
+    image: String!
+    id: String!
+    comments: [Comment1]
+    stars: Int!
+  ): Boolean!
+}
+
+input Comment1 {
+  author: Author1!
+  body: String!
+}
+
+type Comment2 {
+  author: String!
+  body: String!
+}
+
+input Author1 {
+  username: String!
+  email: String!
+  password: String!
+  profilePicture: String!
+  id: String!
+}
+
+type Author2 {
+  username: String!
+  email: String!
+  password: String!
+  profilePicture: String!
+  id: String!
 }
 
 type User {
   username: String!
   email: String!
   password: String!
+}
+
+type Review {
+  title: String!
+  author: Author2!
+  image: String!
+  id: String!
+  comments: [Comment2]
+  stars: Int!
 }

@@ -1,5 +1,7 @@
 import { IResolvers } from "graphql-tools";
 const { User } = require("../../DataBase/src/Models/User");
+const { Review } = require("../../DataBase/src/Models/Review");
+import { ReviewArgsInt } from "./Interfaces/ReviewArgsInt";
 import { UserArgsInt } from "../src/Interfaces/UserArgsInt";
 import jwt from "jsonwebtoken";
 import config from "config";
@@ -10,6 +12,10 @@ const resolvers: IResolvers = {
     getAllUsers: async (_: void, __: void) => {
       const users = await User.findAll();
       return users;
+    },
+    getAllReviews: async (_: void, __: void) => {
+      const reviews = await Review.findAll();
+      return reviews;
     },
   },
   Mutation: {
@@ -63,6 +69,22 @@ const resolvers: IResolvers = {
         config.get("jwtPrivateKey")
       );
       return token;
+    },
+    Review: async (_: any, args: ReviewArgsInt) => {
+      await Review.sync({ force: true });
+      try {
+        const review = await Review.build({
+          title: args.title,
+          author: args.author,
+          image: args.image,
+          id: args.id,
+          comments: args.comments,
+          stars: args.stars,
+        });
+        await review.save();
+      } catch (error) {
+        console.log("ERR", error);
+      }
     },
   },
 };
