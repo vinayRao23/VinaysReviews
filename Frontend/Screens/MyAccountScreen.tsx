@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: colors.danger,
-    width: 90,
+    width: 350,
     height: 45,
-    borderRadius: 5,
-    left: 40,
-    top: 300,
+    borderRadius: 20,
+    top: 470,
+    alignSelf: "center",
   },
   logoutButtonText: {
     color: colors.white,
