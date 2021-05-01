@@ -17,7 +17,7 @@ const AppTextInput = ({ style, ...rest }: any) => {
 const styles = StyleSheet.create({
   textInput: {
     fontSize: 20,
-    fontFamily: "Arial",
+    fontFamily: "Avenir-Medium",
     marginTop: 1,
   },
 });
