@@ -12,4 +12,5 @@ export const Review = sequelize.define("Review", {
     allowNull: false,
   },
   stars: { type: DataTypes.INTEGER, allowNull: false },
+  body: { type: DataTypes.TEXT, allowNull: false },
 });

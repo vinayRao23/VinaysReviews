@@ -16,6 +16,7 @@ type Mutation {
     title: String!
     author: Author1!
     image: String!
+    body: String!
     id: String!
     comments: [Comment1]
     stars: Int!

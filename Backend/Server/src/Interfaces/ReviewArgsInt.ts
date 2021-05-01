@@ -5,4 +5,5 @@ export interface ReviewArgsInt {
   id: string;
   comments: Array<object>;
   stars: number;
+  body: string;
 }
