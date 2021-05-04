@@ -9,6 +9,7 @@ const ReviewTextInput = ({ style, placeholder }: any) => {
         style={[styles.textInput, style]}
         multiline={true}
         placeholder={placeholder}
+        placeholderTextColor={colors.medium}
         autoCapitalize="none"
         autoCorrect={false}
       />

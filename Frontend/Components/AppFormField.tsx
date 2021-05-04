@@ -5,7 +5,7 @@ import AppTextInput from "./AppTextInput";
 import AppErrorMessage from "./AppErrorMessage";
 import colors from "../config/colors";
 
-const AppFormField = ({ name, width, ...rest }: any) => {
+const AppFormField = ({ name, width, style, ...rest }: any) => {
   const {
     handleChange,
     setFieldTouched,
@@ -17,7 +17,7 @@ const AppFormField = ({ name, width, ...rest }: any) => {
       <AppTextInput
         onChangeText={handleChange(name)}
         onBlur={() => setFieldTouched(name)}
-        style={styles.formikContainer}
+        style={[styles.formikContainer, style]}
         {...rest}
       />
       <AppErrorMessage error={errors[name]} visible={touched[name]} />
