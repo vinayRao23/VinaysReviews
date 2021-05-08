@@ -7,12 +7,7 @@ import AppFormField from "../Components/AppFormField";
 import AppFormImagePicker from "../Components/AppFormImagePicker";
 import AppSubmitButton from "../Components/AppSubmitButton";
 import ReviewTextInput from "../Components/ReviewTextInput";
-
-const validationSchema = Yup.object().shape({
-  title: Yup.string().required().label("Title"),
-  image: Yup.array().required().max(1).label("Please select an image"),
-  body: Yup.string().required().label("Body"),
-});
+import Stars from "../Components/Stars";
 
 const CreateReviewScreen = () => {
   return (
@@ -20,10 +15,17 @@ const CreateReviewScreen = () => {
       <AppForm
         initialValues={{ title: "", image: [], body: "" }}
         onSubmit={(values: any) => console.log(values)}
-        validationSchema={validationSchema}
       >
         <SafeAreaView style={styles.imagePicker}>
           <AppFormImagePicker name="image" />
+        </SafeAreaView>
+        <AppErrorMessage
+          error="Please Select an Image"
+          visible={true}
+          style={{ bottom: -45 }}
+        />
+        <SafeAreaView style={{ bottom: 50 }}>
+          <Stars />
         </SafeAreaView>
         <AppFormField
           placeholder="Title"
@@ -32,9 +34,19 @@ const CreateReviewScreen = () => {
           name="title"
           style={styles.titleField}
         />
+        <AppErrorMessage
+          error="Title Field Required"
+          visible={true}
+          style={{ bottom: -7 }}
+        />
         <ReviewTextInput
           placeholder="Create Review Here..."
           style={styles.createReviewTextField}
+        />
+        <AppErrorMessage
+          error="Body Field Required"
+          visible={true}
+          style={{ bottom: -8 }}
         />
         <SafeAreaView style={styles.button}>
           <AppSubmitButton title="Create Review" />
@@ -46,18 +58,18 @@ const CreateReviewScreen = () => {
 
 const styles = StyleSheet.create({
   imagePicker: {
-    top: 120,
+    top: 80,
     justifyContent: "center",
     left: 28,
   },
   createReviewTextField: {
-    bottom: -130,
+    bottom: -16,
   },
   titleField: {
-    bottom: -130,
+    bottom: -15,
   },
   button: {
-    bottom: 70,
+    bottom: 185,
   },
 });
 

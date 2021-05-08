@@ -8,7 +8,7 @@ const AppErrorMessage = ({ error, visible, style }: any) => {
   }
   return (
     <View style={style}>
-      <Text style={styles.errorMessageText}>{error}</Text>
+      <Text style={[styles.errorMessageText, style]}>{error}</Text>
     </View>
   );
 };
