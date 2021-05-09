@@ -10,8 +10,10 @@ import storage from "../auth/storage";
 import AppText from "../Components/AppText";
 import colors from "../config/colors";
 import { AuthContext } from "../Context/authContext";
+import AppRedirect from "../Components/AppRedirect";
+import routes from "../Navigation/routes";
 
-const MyAccountScreen = () => {
+const MyAccountScreen = ({ navigation }: any) => {
   const authContext = useContext(AuthContext);
   const handleSubmit = async () => {
     try {
@@ -39,6 +41,16 @@ const MyAccountScreen = () => {
           <AppText style={styles.emailText}>{authContext.user.email}</AppText>
         </SafeAreaView>
       </LinearGradient>
+      <SafeAreaView>
+        <AppText style={styles.reviewsCreatedText}>Reviews Created: 5</AppText>
+      </SafeAreaView>
+      <SafeAreaView>
+        <AppRedirect
+          style={{ bottom: 150 }}
+          clickableText="My Profile"
+          onPress={() => navigation.navigate(routes.FEED)}
+        />
+      </SafeAreaView>
       <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
         <SafeAreaView>
           <AppText style={styles.logoutButtonText}>Logout</AppText>
@@ -58,7 +70,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 45,
     borderRadius: 20,
-    top: 470,
+    top: 300,
     alignSelf: "center",
   },
   logoutButtonText: {
@@ -96,6 +108,13 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
+  },
+  reviewsCreatedText: {
+    fontSize: 25,
+    top: 30,
+    alignSelf: "center",
+    fontFamily: "Avenir-Medium",
+    right: 5,
   },
 });
 
