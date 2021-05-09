@@ -3,7 +3,7 @@ import { useFormikContext } from "formik";
 import ImageInputList from "./ImageInputList";
 import AppErrorMessage from "./AppErrorMessage";
 
-const AppFormImagePicker = ({ name, ...rest }: any) => {
+const AppFormImagePicker = ({ name, errStyle, ...rest }: any) => {
   const { errors, setFieldValue, touched, values } = useFormikContext<any>();
   const imageUri = values[name];
 
@@ -26,7 +26,11 @@ const AppFormImagePicker = ({ name, ...rest }: any) => {
         onAddImage={handleAdd}
         {...rest}
       />
-      <AppErrorMessage error={errors[name]} visible={touched[name]} />
+      <AppErrorMessage
+        error={errors[name]}
+        style={errStyle}
+        visible={touched[name]}
+      />
     </Fragment>
   );
 };

@@ -5,7 +5,7 @@ import AppTextInput from "./AppTextInput";
 import AppErrorMessage from "./AppErrorMessage";
 import colors from "../config/colors";
 
-const AppFormField = ({ name, width, style, ...rest }: any) => {
+const AppFormField = ({ name, width, style, errStyle, ...rest }: any) => {
   const {
     handleChange,
     setFieldTouched,
@@ -20,7 +20,11 @@ const AppFormField = ({ name, width, style, ...rest }: any) => {
         style={[styles.formikContainer, style]}
         {...rest}
       />
-      <AppErrorMessage error={errors[name]} visible={touched[name]} />
+      <AppErrorMessage
+        style={errStyle}
+        error={errors[name]}
+        visible={touched[name]}
+      />
     </Fragment>
   );
 };

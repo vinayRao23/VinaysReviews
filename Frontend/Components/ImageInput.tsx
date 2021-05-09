@@ -57,7 +57,7 @@ const ImageInput = ({ imageUri, onChangeImage }: any) => {
           <MaterialCommunityIcons
             name="image"
             color={colors.medium}
-            size={100}
+            size={70}
           />
         ) : (
           <Image source={{ uri: imageUri }} style={styles.image} />

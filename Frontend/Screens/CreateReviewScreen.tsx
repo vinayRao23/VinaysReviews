@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
 import AppErrorMessage from "../Components/AppErrorMessage";
@@ -9,21 +9,27 @@ import AppSubmitButton from "../Components/AppSubmitButton";
 import ReviewTextInput from "../Components/ReviewTextInput";
 import Stars from "../Components/Stars";
 
+const validationSchema = Yup.object().shape({
+  image: Yup.array().required().max(1).min(1).label("Image"),
+  title: Yup.string().required().label("Title"),
+  body: Yup.string().required().label("Body"),
+});
+
 const CreateReviewScreen = () => {
   return (
     <SafeAreaView>
       <AppForm
         initialValues={{ title: "", image: [], body: "" }}
         onSubmit={(values: any) => console.log(values)}
+        validationSchema={validationSchema}
       >
         <SafeAreaView style={styles.imagePicker}>
-          <AppFormImagePicker name="image" />
+          <AppFormImagePicker
+            name="image"
+            errStyle={{ bottom: -2, right: 13.5 }}
+          />
         </SafeAreaView>
-        <AppErrorMessage
-          error="Please Select an Image"
-          visible={true}
-          style={{ bottom: -45 }}
-        />
+
         <SafeAreaView style={{ bottom: 50 }}>
           <Stars />
         </SafeAreaView>
@@ -32,22 +38,19 @@ const CreateReviewScreen = () => {
           autoCapitalize="none"
           autoCorrect={false}
           name="title"
-          style={styles.titleField}
+          style={[styles.titleField, { bottom: -8 }]}
+          errStyle={{ bottom: -2 }}
         />
-        <AppErrorMessage
-          error="Title Field Required"
-          visible={true}
-          style={{ bottom: -7 }}
-        />
+
         <ReviewTextInput
           placeholder="Create Review Here..."
           style={styles.createReviewTextField}
+          errStyle={{ top: 150, right: 120 }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          name="body"
         />
-        <AppErrorMessage
-          error="Body Field Required"
-          visible={true}
-          style={{ bottom: -8 }}
-        />
+
         <SafeAreaView style={styles.button}>
           <AppSubmitButton title="Create Review" />
         </SafeAreaView>
@@ -63,13 +66,13 @@ const styles = StyleSheet.create({
     left: 28,
   },
   createReviewTextField: {
-    bottom: -16,
+    bottom: -8,
   },
   titleField: {
-    bottom: -15,
+    bottom: -10,
   },
   button: {
-    bottom: 185,
+    bottom: 175,
   },
 });
 

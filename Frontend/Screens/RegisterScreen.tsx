@@ -41,7 +41,7 @@ const RegisterScreen = ({ navigation }: any) => {
       const user = jwtDecode(result.data.registerUser);
       authContext.setUser(user);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       setApolloErrorVisible(true);
     }
   };
