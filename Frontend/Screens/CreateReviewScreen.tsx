@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import * as Yup from "yup";
-import AppErrorMessage from "../Components/AppErrorMessage";
+import { client } from "../App";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import AppFormImagePicker from "../Components/AppFormImagePicker";
 import AppSubmitButton from "../Components/AppSubmitButton";
 import ReviewTextInput from "../Components/ReviewTextInput";
-import Stars from "../Components/Stars";
+import { REVIEW } from "../Apollo/ReviewMutation";
+import { generateId } from "../Utils/GenerateId";
+import routes from "../Navigation/routes";
+import { AuthContext } from "../Context/authContext";
+import { AirbnbRating } from "react-native-ratings";
+import { useMutation } from "@apollo/client";
 
 const validationSchema = Yup.object().shape({
   image: Yup.array().required().max(1).min(1).label("Image"),
@@ -15,12 +20,38 @@ const validationSchema = Yup.object().shape({
   body: Yup.string().required().label("Body"),
 });
 
-const CreateReviewScreen = () => {
+const CreateReviewScreen = ({ navigation }: any) => {
+  const [stars, setStars] = useState(0);
+  const [Review] = useMutation(REVIEW);
+  const authContext = useContext(AuthContext);
+  const handleSubmit = async (values: any) => {
+    try {
+      await Review({
+        variables: {
+          title: values.title,
+          author: {
+            email: authContext.user.email,
+            username: authContext.user.username,
+            id: authContext.user.id,
+            profilePicture: authContext.user.profilePicture,
+          },
+          image: values.image[0],
+          body: values.body,
+          id: generateId(24),
+          authorid: authContext.user.id,
+          stars,
+        },
+      });
+      navigation.navigate(routes.MY_REVIEWS);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView>
       <AppForm
         initialValues={{ title: "", image: [], body: "" }}
-        onSubmit={(values: any) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <SafeAreaView style={styles.imagePicker}>
@@ -29,9 +60,16 @@ const CreateReviewScreen = () => {
             errStyle={{ bottom: -2, right: 13.5 }}
           />
         </SafeAreaView>
-
         <SafeAreaView style={{ bottom: 50 }}>
-          <Stars />
+          <SafeAreaView style={{ marginLeft: 170, bottom: 0 }}>
+            <AirbnbRating
+              count={5}
+              reviews={[]}
+              defaultRating={0}
+              size={35}
+              onFinishRating={(value: number) => setStars(value)}
+            />
+          </SafeAreaView>
         </SafeAreaView>
         <AppFormField
           placeholder="Title"

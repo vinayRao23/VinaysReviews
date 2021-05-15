@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStackNavigator from "./Navigation/AuthStackNavigator";
 import { AppRegistry } from "react-native";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import storage from "./auth/storage";
 import AppNavigator from "./Navigation/AppNavigator";
 import AppLoading from "expo-app-loading";
@@ -30,11 +30,13 @@ const App = () => {
     );
   }
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      <NavigationContainer>
-        {user ? <AppNavigator /> : <AuthStackNavigator />}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <ApolloProvider client={client}>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <NavigationContainer>
+          {user ? <AppNavigator /> : <AuthStackNavigator />}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </ApolloProvider>
   );
 };
 
