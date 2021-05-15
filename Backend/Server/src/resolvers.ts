@@ -17,10 +17,16 @@ const resolvers: IResolvers = {
       const reviews = await Review.findAll();
       return reviews;
     },
+    getMyReviews: async (_: void, args: ReviewArgsInt) => {
+      const reviews = await Review.findAll({
+        where: { authorid: args.authorid },
+      });
+      return reviews;
+    },
   },
   Mutation: {
     registerUser: async (_: void, args: UserArgsInt) => {
-      await User.sync({ force: true });
+      // await User.sync({ force: true });
       try {
         const salt = await bcrypt.genSalt(10);
         const password = await bcrypt.hash(args.password, salt);
@@ -81,8 +87,10 @@ const resolvers: IResolvers = {
           comments: args.comments,
           stars: args.stars,
           body: args.body,
+          authorid: args.authorid,
         });
         await review.save();
+        return true;
       } catch (error) {
         console.log("ERR", error);
       }

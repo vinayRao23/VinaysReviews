@@ -1,6 +1,7 @@
 type Query {
   getAllUsers: [User]
   getAllReviews: [Review]
+  getMyReviews(authorid: String!): [Review]
 }
 
 type Mutation {
@@ -20,6 +21,7 @@ type Mutation {
     id: String!
     comments: [Comment1]
     stars: Int!
+    authorid: String!
   ): Boolean!
 }
 
@@ -36,7 +38,7 @@ type Comment2 {
 input Author1 {
   username: String!
   email: String!
-  password: String!
+  password: String
   profilePicture: String!
   id: String!
 }
@@ -44,7 +46,7 @@ input Author1 {
 type Author2 {
   username: String!
   email: String!
-  password: String!
+  password: String
   profilePicture: String!
   id: String!
 }

@@ -6,4 +6,5 @@ export interface ReviewArgsInt {
   comments: Array<object>;
   stars: number;
   body: string;
+  authorid: string;
 }
