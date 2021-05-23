@@ -6,6 +6,7 @@ import cors from "cors";
 import resolvers from "./resolvers";
 import fs from "fs";
 import path from "path";
+const bodyParser = require("body-parser");
 const { connectToDB } = require("../../DataBase/src/connection");
 const app = express();
 const server = new ApolloServer({
@@ -18,6 +19,8 @@ const server = new ApolloServer({
 app.use("*", cors());
 app.use(compression());
 connectToDB();
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 server.applyMiddleware({ app, path: "/graphql" });
 
 if (!config.get("jwtPrivateKey")) {

@@ -23,6 +23,12 @@ const resolvers: IResolvers = {
       });
       return reviews;
     },
+    getOneReview: async (_: void, args: ReviewArgsInt) => {
+      const review = await Review.findOne({
+        where: { id: args.id },
+      });
+      return review;
+    },
   },
   Mutation: {
     registerUser: async (_: void, args: UserArgsInt) => {
@@ -77,7 +83,7 @@ const resolvers: IResolvers = {
       return token;
     },
     Review: async (_: any, args: ReviewArgsInt) => {
-      await Review.sync({ force: true });
+      // await Review.sync({ force: true });
       try {
         const review = await Review.build({
           title: args.title,

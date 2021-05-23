@@ -2,6 +2,7 @@ type Query {
   getAllUsers: [User]
   getAllReviews: [Review]
   getMyReviews(authorid: String!): [Review]
+  getOneReview(id: String!): Review
 }
 
 type Mutation {
@@ -61,6 +62,7 @@ type Review {
   title: String!
   author: Author2!
   image: String!
+  body: String!
   id: String!
   comments: [Comment2]
   stars: Int!
