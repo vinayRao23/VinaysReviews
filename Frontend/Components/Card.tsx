@@ -2,9 +2,10 @@ import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
-  Image,
   TouchableOpacity,
+  Image as RNImage,
 } from "react-native";
+import { Image } from "react-native-expo-image-cache";
 import colors from "../config/colors";
 import AppText from "./AppText";
 
@@ -19,11 +20,11 @@ const Card = ({
 }: any) => {
   return (
     <SafeAreaView style={styles.card}>
-      <Image source={image} style={styles.image} />
+      {/* <RNImage source={{ uri: image }} style={styles.image} /> */}
       <SafeAreaView style={styles.detailsContainer}>
         <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.stars}>{stars}</AppText>
-        <Image source={authorImage} style={styles.authorImage} />
+        <AppText style={styles.stars}>{stars}/5</AppText>
+        <Image uri={authorImage} style={styles.authorImage} />
         <AppText style={styles.author}>{author}</AppText>
         <TouchableOpacity onPress={onPress}>
           <AppText style={styles.clickableText}>{clickableText}</AppText>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: "100%",
+    width: 1000,
     height: 200,
     alignSelf: "center",
   },

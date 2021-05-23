@@ -13,12 +13,8 @@ const ReviewTextInput = ({
   errStyle,
   ...rest
 }: any) => {
-  const {
-    handleChange,
-    setFieldTouched,
-    errors,
-    touched,
-  } = useFormikContext<any>();
+  const { handleChange, setFieldTouched, errors, touched } =
+    useFormikContext<any>();
   return (
     <Fragment>
       <View style={[styles.textInputContainer, style]}>

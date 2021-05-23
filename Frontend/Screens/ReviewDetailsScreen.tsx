@@ -1,42 +1,26 @@
 import React from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { View, StyleSheet, Image, ScrollView, Text } from "react-native";
 import AppText from "../Components/AppText";
+import { getOneReview } from "../Apollo/GetOneReviewQuery";
 import colors from "../config/colors";
+import { useQuery } from "@apollo/client";
 
-const ReviewDetailsScreen = ({}: any) => {
+const ReviewDetailsScreen = ({ route }: any) => {
+  const { data, loading } = useQuery(getOneReview, {
+    variables: { id: route.params.id },
+  });
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+  if (data) {
+    console.log(data);
+  }
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/test.png")} />
+      <Image style={styles.image} source={{ uri: data.getOneReview.image }} />
       <ScrollView>
-        <AppText style={styles.title}>
-          Harry Potter and the Half Blood Prince
-        </AppText>
-        <AppText style={styles.subTitle}>
-          This book is so goated if u know what I mean cuh sunny This book is so
-          goated if u know what I mean cuh sunny bunny bunny This book is so
-          goated if u know what I mean cuh sunny bunny This book is so goated if
-          u know what I mean cuh sunny bunny This book is so goated if u know
-          what I mean cuh sunny bunny This book is so goated if u know what I
-          mean cuh sunny bunny This book is so goated if u know what I mean cuh
-          sunny bunny This book is so goated if u know what I mean cuh sunny
-          bunny This book is so goated if u know what I mean cuh sunny bunny
-          This book is so goated if u know what I mean cuh sunny bunny This book
-          is so goated if u know what I mean cuh sunny bunny This book is so
-          goated if u know what I mean cuh sunny bunny This book is so goated if
-          u know what I mean cuh sunny bunny This book is so goated if u know
-          what I mean cuh sunny bunny This book is so goated if u know what I
-          mean cuh sunny bunny cuh sunny bunny This book is so goated if u know
-          what I mean cuh sunny bunny This book is so goated if u know what I
-          mean cuh sunny bunny cuh sunny bunny This book is so goated if u know
-          what I mean cuh sunny bunny This book is so goated if u know what I
-          mean cuh sunny bunny what I mean cuh sunny bunny This book is so
-          goated if u know what I mean cuh sunny bunny cuh sunny bunny This book
-          is so goated if u know what I mean cuh sunny bunny This book is so
-          goated if u know what I mean cuh sunny bunny what I mean cuh sunny
-          bunny This book is so goated if u know what I mean cuh sunny bunny cuh
-          sunny bunny This book is so goated if u know what I mean cuh sunny
-          bunny This book is so goated if u know what I mean cuh sunny bunny
-        </AppText>
+        <AppText style={styles.title}>{data.getOneReview.title}</AppText>
+        <AppText style={styles.subTitle}>{data.getOneReview.body}</AppText>
       </ScrollView>
     </View>
   );

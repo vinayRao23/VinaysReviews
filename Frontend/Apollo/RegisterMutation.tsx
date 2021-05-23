@@ -5,7 +5,7 @@ export const REGISTER = gql`
     $username: String!
     $email: String!
     $password: String!
-    $profilePicture: String
+    $profilePicture: String!
     $id: String!
   ) {
     registerUser(

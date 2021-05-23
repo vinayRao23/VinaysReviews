@@ -35,6 +35,8 @@ const RegisterScreen = ({ navigation }: any) => {
           email: values.email,
           password: values.password,
           id: generateId(24),
+          profilePicture:
+            "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
         },
       });
       await storage.storeToken(result.data.registerUser);

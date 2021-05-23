@@ -27,9 +27,10 @@ const ImageInput = ({ imageUri, onChangeImage }: any) => {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
+        base64: true,
       });
       if (!result.cancelled) {
-        onChangeImage(result.uri);
+        onChangeImage(result.base64);
       }
     } catch (error) {
       console.log("Error reading an image", error);
@@ -60,7 +61,10 @@ const ImageInput = ({ imageUri, onChangeImage }: any) => {
             size={70}
           />
         ) : (
-          <Image source={{ uri: imageUri }} style={styles.image} />
+          <Image
+            source={{ uri: `data:image/jpg;base64,${imageUri}` }}
+            style={styles.image}
+          />
         )}
       </View>
     </TouchableWithoutFeedback>

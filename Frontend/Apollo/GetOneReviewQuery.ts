@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const getMyReviews = gql`
-  query getMyReviews($authorid: String!) {
-    getMyReviews(authorid: $authorid) {
+export const getOneReview = gql`
+  query getOneReview($id: String!) {
+    getOneReview(id: $id) {
       title
       author {
         username
@@ -11,8 +11,8 @@ export const getMyReviews = gql`
         profilePicture
         id
       }
-      body
       image
+      body
       id
       comments {
         author

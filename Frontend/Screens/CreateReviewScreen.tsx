@@ -16,7 +16,10 @@ import { useMutation } from "@apollo/client";
 
 const validationSchema = Yup.object().shape({
   image: Yup.array().required().max(1).min(1).label("Image"),
-  title: Yup.string().required().label("Title"),
+  title: Yup.string()
+    .required()
+    .matches(/^\s*\S[\s\S]*$/, "This field cannot contain only blankspaces")
+    .label("Title"),
   body: Yup.string().required().label("Body"),
 });
 
@@ -35,7 +38,7 @@ const CreateReviewScreen = ({ navigation }: any) => {
             id: authContext.user.id,
             profilePicture: authContext.user.profilePicture,
           },
-          image: values.image[0],
+          image: `data:image/png;base64,${values.image[0]}`,
           body: values.body,
           id: generateId(24),
           authorid: authContext.user.id,
@@ -44,7 +47,7 @@ const CreateReviewScreen = ({ navigation }: any) => {
       });
       navigation.navigate(routes.MY_REVIEWS);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (
@@ -79,7 +82,6 @@ const CreateReviewScreen = ({ navigation }: any) => {
           style={[styles.titleField, { bottom: -8 }]}
           errStyle={{ bottom: -2 }}
         />
-
         <ReviewTextInput
           placeholder="Create Review Here..."
           style={styles.createReviewTextField}
@@ -88,7 +90,6 @@ const CreateReviewScreen = ({ navigation }: any) => {
           autoCorrect={false}
           name="body"
         />
-
         <SafeAreaView style={styles.button}>
           <AppSubmitButton title="Create Review" />
         </SafeAreaView>

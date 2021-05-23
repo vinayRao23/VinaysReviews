@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^5.14.4",
     "expo": "~40.0.0",
     "expo-app-loading": "^1.0.3",
+    "expo-file-system": "~9.3.0",
     "expo-font": "~8.4.0",
     "expo-image-picker": "~9.2.0",
     "expo-linear-gradient": "~8.4.0",
@@ -27,7 +28,10 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-expo-image-cache": "^4.1.0",
+    "react-native-fs": "^1.2.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-image-converter": "^0.4.2",
     "react-native-paper": "^4.7.2",
     "react-native-ratings": "^8.0.4",
     "react-native-reanimated": "~1.13.0",
@@ -41,6 +45,7 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "@types/react-native-fs": "^2.13.0",
     "typescript": "~4.0.0"
   },
   "private": true
