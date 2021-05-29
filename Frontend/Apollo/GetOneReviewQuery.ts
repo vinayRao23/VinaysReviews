@@ -19,6 +19,7 @@ export const getOneReview = gql`
         body
       }
       stars
+      time
     }
   }
 `;

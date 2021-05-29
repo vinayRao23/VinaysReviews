@@ -20,9 +20,11 @@ const MyReviewsScreen = ({ navigation }: any) => {
   const { data, loading } = useQuery(getMyReviews, {
     variables: { authorid: authContext.user.id },
   });
+
   if (loading) {
     return <Text>Loading...</Text>;
   }
+
   if (data) {
     console.log(data);
   }
@@ -44,6 +46,39 @@ const MyReviewsScreen = ({ navigation }: any) => {
                 <SafeAreaView style={styles.detailsContainer}>
                   <AppText style={styles.title}>{item.title}</AppText>
                   <AppText style={styles.stars}>{item.stars}/5</AppText>
+                  {item.stars === 0 ? (
+                    <RNImage
+                      source={require("../assets/zerostars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 1 ? (
+                    <RNImage
+                      source={require("../assets/onestar.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 2 ? (
+                    <RNImage
+                      source={require("../assets/twostars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 3 ? (
+                    <RNImage
+                      source={require("../assets/threestars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 4 ? (
+                    <RNImage
+                      source={require("../assets/fourstars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 5 ? (
+                    <RNImage
+                      source={require("../assets/fivestars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : (
+                    ""
+                  )}
                   <Image
                     uri={item.author.profilePicture}
                     style={styles.authorImage}
@@ -69,7 +104,7 @@ const MyReviewsScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
-    backgroundColor: colors.white,
+    backgroundColor: "#f2f2f2",
     overflow: "hidden",
     width: "90%",
     height: 370,
@@ -77,6 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 70,
     flex: 1,
   },
+  starsImage: { bottom: 80, left: 135, height: 80, width: 250 },
   image: {
     width: 1000,
     height: 200,
@@ -98,12 +134,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontWeight: "600",
     fontFamily: "Avenir-Medium",
+    top: 30,
   },
   author: {
     fontSize: 15,
     paddingLeft: 62,
     paddingTop: 30,
-    bottom: 93,
+    bottom: 172,
     fontWeight: "600",
     fontFamily: "Avenir-Medium",
   },
@@ -112,7 +149,7 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 21,
     marginLeft: 15,
-    bottom: 33,
+    bottom: 110,
   },
   clickableText: {
     bottom: 30,
