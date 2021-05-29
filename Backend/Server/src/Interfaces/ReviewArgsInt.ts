@@ -7,4 +7,5 @@ export interface ReviewArgsInt {
   stars: number;
   body: string;
   authorid: string;
+  time: number;
 }

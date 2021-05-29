@@ -66,4 +66,5 @@ type Review {
   id: String!
   comments: [Comment2]
   stars: Int!
+  time: Float!
 }

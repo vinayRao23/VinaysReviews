@@ -83,7 +83,6 @@ const resolvers: IResolvers = {
       return token;
     },
     Review: async (_: any, args: ReviewArgsInt) => {
-      // await Review.sync({ force: true });
       try {
         const review = await Review.build({
           title: args.title,
@@ -94,6 +93,7 @@ const resolvers: IResolvers = {
           stars: args.stars,
           body: args.body,
           authorid: args.authorid,
+          time: Date.now(),
         });
         await review.save();
         return true;
