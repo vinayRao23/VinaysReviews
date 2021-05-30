@@ -10,16 +10,19 @@ import storage from "../auth/storage";
 import AppText from "../Components/AppText";
 import colors from "../config/colors";
 import { AuthContext } from "../Context/authContext";
-import AppRedirect from "../Components/AppRedirect";
-import routes from "../Navigation/routes";
+import { useQuery } from "@apollo/client";
+import { getMyReviews } from "../Apollo/GetMyReviewQuery";
 
 const MyAccountScreen = ({ navigation }: any) => {
   const authContext = useContext(AuthContext);
+  const { data } = useQuery(getMyReviews, {
+    variables: { authorid: authContext.user.id },
+  });
+  console.log(data);
   const handleSubmit = async () => {
     try {
       await storage.removeToken();
       authContext.setUser(null);
-      console.log(authContext.user);
     } catch (error) {
       console.log(error);
     }
@@ -42,14 +45,19 @@ const MyAccountScreen = ({ navigation }: any) => {
         </SafeAreaView>
       </LinearGradient>
       <SafeAreaView>
-        <AppText style={styles.reviewsCreatedText}>Reviews Created: 5</AppText>
+        <AppText style={styles.reviewsCreatedText}>
+          Reviews Created: {data.getMyReviews.length}
+        </AppText>
       </SafeAreaView>
       <SafeAreaView>
-        <AppRedirect
-          style={{ bottom: 150 }}
-          clickableText="My Profile"
-          onPress={() => navigation.navigate(routes.FEED)}
-        />
+        <AppText style={[styles.reviewsCreatedText, { top: 50 }]}>
+          Comments: 0
+        </AppText>
+      </SafeAreaView>
+      <SafeAreaView>
+        <AppText style={[styles.reviewsCreatedText, { top: 70 }]}>
+          Times Commented: 0
+        </AppText>
       </SafeAreaView>
       <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
         <SafeAreaView>

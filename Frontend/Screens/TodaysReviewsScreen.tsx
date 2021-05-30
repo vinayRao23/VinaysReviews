@@ -42,83 +42,76 @@ const TodaysReviewsScreen = ({ navigation }: any) => {
     return <Text>Loading...</Text>;
   }
 
-  if (data) {
-    console.log(data);
-  }
   return (
-    <SafeAreaView>
-      <FlatList
-        data={data && data.getMyReviews}
-        keyExtractor={(c) => c.id}
-        renderItem={({ item, index }): any => {
-          if (
-            index > -1 &&
-            Math.round(Date.now() - item.time) / 60000 <= 1440
-          ) {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(routes.DETAILS, { id: item.id })
-                }
-              >
-                <SafeAreaView style={styles.card}>
-                  <RNImage source={{ uri: item.image }} style={styles.image} />
-                  <SafeAreaView style={styles.detailsContainer}>
-                    <AppText style={styles.title}>{item.title}</AppText>
-                    <AppText style={styles.stars}>{item.stars}/5</AppText>
-                    {item.stars === 0 ? (
-                      <RNImage
-                        source={require("../assets/zerostars.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : item.stars === 1 ? (
-                      <RNImage
-                        source={require("../assets/onestar.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : item.stars === 2 ? (
-                      <RNImage
-                        source={require("../assets/twostars.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : item.stars === 3 ? (
-                      <RNImage
-                        source={require("../assets/threestars.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : item.stars === 4 ? (
-                      <RNImage
-                        source={require("../assets/fourstars.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : item.stars === 5 ? (
-                      <RNImage
-                        source={require("../assets/fivestars.png")}
-                        style={styles.starsImage}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    <Image
-                      uri={item.author.profilePicture}
-                      style={styles.authorImage}
+    <FlatList
+      style={{ backgroundColor: "#EEFAFF" }}
+      data={data && data.getMyReviews}
+      keyExtractor={(c) => c.id}
+      renderItem={({ item, index }): any => {
+        if (index > -1 && Math.round(Date.now() - item.time) / 60000 <= 1440) {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(routes.DETAILS, { id: item.id })
+              }
+            >
+              <SafeAreaView style={styles.card}>
+                <RNImage source={{ uri: item.image }} style={styles.image} />
+                <SafeAreaView style={styles.detailsContainer}>
+                  <AppText style={styles.title}>{item.title}</AppText>
+                  <AppText style={styles.stars}>{item.stars}/5</AppText>
+                  {item.stars === 0 ? (
+                    <RNImage
+                      source={require("../assets/zerostars.png")}
+                      style={styles.starsImage}
                     />
-                    <AppText style={styles.author}>
-                      {item.author.username}
+                  ) : item.stars === 1 ? (
+                    <RNImage
+                      source={require("../assets/onestar.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 2 ? (
+                    <RNImage
+                      source={require("../assets/twostars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 3 ? (
+                    <RNImage
+                      source={require("../assets/threestars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 4 ? (
+                    <RNImage
+                      source={require("../assets/fourstars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : item.stars === 5 ? (
+                    <RNImage
+                      source={require("../assets/fivestars.png")}
+                      style={styles.starsImage}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <Image
+                    uri={item.author.profilePicture}
+                    style={styles.authorImage}
+                  />
+                  <AppText style={styles.author}>
+                    {item.author.username}
+                  </AppText>
+                  <TouchableOpacity onPress={() => console.log("FATTY")}>
+                    <AppText style={styles.clickableText}>
+                      {item.clickableText}
                     </AppText>
-                    <TouchableOpacity onPress={() => console.log("FATTY")}>
-                      <AppText style={styles.clickableText}>
-                        {item.clickableText}
-                      </AppText>
-                    </TouchableOpacity>
-                  </SafeAreaView>
+                  </TouchableOpacity>
                 </SafeAreaView>
-              </TouchableOpacity>
-            );
-          }
-        }}
-      />
-    </SafeAreaView>
+              </SafeAreaView>
+            </TouchableOpacity>
+          );
+        }
+      }}
+    />
   );
 };
 

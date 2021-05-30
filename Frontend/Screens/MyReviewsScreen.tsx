@@ -24,13 +24,10 @@ const MyReviewsScreen = ({ navigation }: any) => {
   if (loading) {
     return <Text>Loading...</Text>;
   }
-
-  if (data) {
-    console.log(data);
-  }
   return (
     <>
       <FlatList
+        style={{ backgroundColor: "#EEFAFF" }}
         data={data && data.getMyReviews}
         keyExtractor={(c) => c.id}
         renderItem={({ item }) => {
