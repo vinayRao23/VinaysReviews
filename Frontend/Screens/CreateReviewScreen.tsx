@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
   image: Yup.array().required().max(1).min(1).label("Image"),
   title: Yup.string()
     .required()
+    .max(30)
     .matches(/^\s*\S[\s\S]*$/, "This field cannot contain only blankspaces")
     .label("Title"),
   body: Yup.string().required().label("Body"),

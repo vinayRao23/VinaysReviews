@@ -59,7 +59,6 @@ const TodaysReviewsScreen = ({ navigation }: any) => {
                 <RNImage source={{ uri: item.image }} style={styles.image} />
                 <SafeAreaView style={styles.detailsContainer}>
                   <AppText style={styles.title}>{item.title}</AppText>
-                  <AppText style={styles.stars}>{item.stars}/5</AppText>
                   {item.stars === 0 ? (
                     <RNImage
                       source={require("../assets/zerostars.png")}
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     height: 200,
     alignSelf: "center",
   },
-  starsImage: { bottom: 80, left: 135, height: 80, width: 250 },
+  starsImage: { bottom: -55, left: 135, height: 80, width: 250 },
   detailsContainer: {
     padding: 20,
   },
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: 62,
     paddingTop: 30,
-    bottom: 172,
+    bottom: 138,
     fontWeight: "600",
     fontFamily: "Avenir-Medium",
   },
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 21,
     marginLeft: 15,
-    bottom: 110,
+    bottom: 75,
   },
   clickableText: {
     bottom: 30,
