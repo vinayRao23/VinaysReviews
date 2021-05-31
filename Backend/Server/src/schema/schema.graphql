@@ -24,16 +24,19 @@ type Mutation {
     stars: Int!
     authorid: String!
   ): Boolean!
+  Comment(author: Author1, body: String, id: String): Boolean
 }
 
 input Comment1 {
   author: Author1!
   body: String!
+  id: String!
 }
 
 type Comment2 {
   author: String!
   body: String!
+  id: String!
 }
 
 input Author1 {

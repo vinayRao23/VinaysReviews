@@ -6,6 +6,8 @@ import { UserArgsInt } from "../src/Interfaces/UserArgsInt";
 import jwt from "jsonwebtoken";
 import config from "config";
 import bcrypt from "bcrypt";
+import { CommentArgsInt } from "./Interfaces/CommentArgsInt";
+const { Comment } = require("../../DataBase/src/Models/Comment");
 
 const resolvers: IResolvers = {
   Query: {
@@ -100,6 +102,20 @@ const resolvers: IResolvers = {
       } catch (error) {
         console.log("ERR", error);
       }
+    },
+    Comment: async (_: any, args: CommentArgsInt) => {
+      await Comment.sync({ force: true });
+      try {
+        const comment = await Comment.build({
+          author: args.author,
+          body: args.body,
+          id: args.id,
+        });
+        await comment.save();
+      } catch (error) {
+        console.log("Error", error);
+      }
+      return true;
     },
   },
 };
